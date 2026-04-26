@@ -99,10 +99,18 @@ h1 {
 }
 
 .gallery-pro img {
-  min-width: 80%;
-  border-radius: 15px;
+  min-width: 60%;   /* كانت 80% → ولات أصغر */
+  max-width: 60%;
+  height: 160px;    /* يعطيها شكل منظم */
+  object-fit: cover;
+  border-radius: 12px;
   border: 2px solid #b30000;
   scroll-snap-align: center;
+  transition: 0.3s;
+}
+
+.gallery-pro img:hover {
+  transform: scale(1.05);
 }
 
 /* FOOTER */
