@@ -89,7 +89,7 @@ h1 {
   font-weight: bold;
 }
 
-/* GALLERY */
+/* GALLERY (SWIPE + SMALL IMAGES) */
 .gallery-pro {
   display: flex;
   overflow-x: auto;
@@ -99,9 +99,9 @@ h1 {
 }
 
 .gallery-pro img {
-  min-width: 60%;   /* كانت 80% → ولات أصغر */
+  min-width: 60%;
   max-width: 60%;
-  height: 160px;    /* يعطيها شكل منظم */
+  height: 160px;
   object-fit: cover;
   border-radius: 12px;
   border: 2px solid #b30000;
@@ -111,6 +111,35 @@ h1 {
 
 .gallery-pro img:hover {
   transform: scale(1.05);
+}
+
+/* LIGHTBOX */
+#lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+}
+
+#closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 35px;
+  color: white;
+  cursor: pointer;
 }
 
 /* FOOTER */
@@ -130,12 +159,12 @@ h1 {
 <!-- HEADER -->
 <div class="header">
   <img src="images/logo1.png" class="logo-img">
-  <div class="title"> فوج نابل</div>
+  <div class="title">فوج نابل</div>
   <img src="images/logo2.png" class="logo-img">
 </div>
 
 <!-- PROFILE -->
-<img src="https://i.imgur.com/yourimage.jpg" class="avatar">
+<img src="images/avatar.jpg" class="avatar">
 
 <h1>Youssef Turki | يوسف التركي</h1>
 <div class="rank">Rover | جوال</div>
@@ -143,27 +172,23 @@ h1 {
 <!-- SOCIAL -->
 <div class="section">📱 Social | التواصل</div>
 <a class="btn" href="https://www.instagram.com/troupe_scout_nabeul/">Instagram</a>
-<a class="btn" href="https://www.tiktok.com/@scout_nabeul?_r=1&_t=ZS-95q9CJBYt9t">TikTok</a>
-<a class="btn" href="https://www.facebook.com/share/18p8r2yrag/">Facebook</a>
+<a class="btn" href="https://www.tiktok.com/@scout_nabeul">TikTok</a>
+<a class="btn" href="https://www.facebook.com">Facebook</a>
 
 <!-- CONTACT -->
 <a class="btn" href="https://wa.me/21656166178">💬 WhatsApp</a>
-<a class="btn" href="tel:+21656166178">📞 Call | اتصال</a>
-<a class="btn" href="https://maps.app.goo.gl/VmoGWNn2AGfecm689">📍 Location | الموقع</a>
+<a class="btn" href="tel:+21656166178">📞 Call</a>
+<a class="btn" href="https://maps.google.com">📍 Location</a>
 
 <!-- VCARD -->
-<a class="btn" href="data:text/vcard;charset=utf-8,BEGIN:VCARD
-VERSION:3.0
-FN:Youssef Turki
-TEL:+21656166178
-END:VCARD" download="contact.vcf">📇 Save Contact | حفظ الرقم</a>
+<a class="btn" href="contact.vcf">📇 Save Contact</a>
 
 <!-- BADGES -->
-<div class="section">🎖️ Badges | الشارات</div>
+<div class="section">🎖️ Badges</div>
 <div class="card"></div>
 
 <!-- GALLERY -->
-<div class="section">🖼️ Gallery | الصور</div>
+<div class="section">🖼️ Gallery</div>
 <div class="gallery-pro">
   <img src="images/camp1.jpg">
   <img src="images/camp2.jpg">
@@ -176,16 +201,38 @@ END:VCARD" download="contact.vcf">📇 Save Contact | حفظ الرقم</a>
 </div>
 
 <!-- OATH -->
-<div class="section">📜 Scout Oath | الوعد الكشفي</div>
+<div class="section">📜 Scout Oath</div>
 <div class="card">
-"On my honor, I promise to do my best to do my duty to God and country, to help people in all circumstances, and to obey the Scout Law."  
-<br>
-"أعد بشرفي أن أبذل جهدي في أن أقوم بما يجب عليّ نحو الله ثم الوطن، وأن أساعد الناس في جميع الظروف، وأن أعمل بقانون الكشافة"
+"On my honor, I promise to do my best to do my duty to God and country, to help people in all circumstances, and to obey the Scout Law."<br>
+أعد بشرفي أن أبذل جهدي في أن أقوم بما يجب عليّ نحو الله ثم الوطن، وأن أساعد الناس في جميع الظروف، وأن أعمل بقانون الكشافة"
 </div>
 
-<div class="footer">troupe_scout_nabeulID | بطاقة فوج نابل</div>
+<div class="footer">troupe_scout_nabeul ID| بطاقة فوج نابل</div>
 
 </div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <span id="closeBtn">&times;</span>
+  <img id="lightbox-img">
+</div>
+
+<script>
+const images = document.querySelectorAll(".gallery-pro img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const closeBtn = document.getElementById("closeBtn");
+
+images.forEach(img => {
+  img.addEventListener("click", () => {
+    lightbox.style.display = "flex";
+    lightboxImg.src = img.src;
+  });
+});
+
+closeBtn.onclick = () => lightbox.style.display = "none";
+lightbox.onclick = () => lightbox.style.display = "none";
+</script>
 
 </body>
 </html>
